@@ -46,7 +46,12 @@
             <tr th:each="jobElement : ${job}">
                 <span th:each="keySet : ${jobElement}">
                     <td th:text="${#strings.capitalizeWords(keySet.key)}" />
-                    <td th:text="${keySet.value}" />
+                    <td th:unless="${keySet.key == 'name'}">
+                        <a th:href="@{/list/jobs(column=${keySet.key},value=${keySet.value})}">
+                        <p th:text="${keySet.value}" />
+                        </a>
+                    </td>
+                    <td th:if="${keySet.key == 'name'}" th:text="${keySet.value}" />
                 </span>
             </tr>
         </tbody>
