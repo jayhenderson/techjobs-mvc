@@ -31,6 +31,8 @@ public class SearchController {
 
         if (searchType.equals("all") && searchTerm.equals("")) {
             jobs = JobData.findAll();
+        } else if (searchType.equals("all") && !searchTerm.equals("")) {
+            jobs = JobData.findByValue(searchTerm);
         } else {
             jobs = JobData.findByColumnAndValue(searchType, searchTerm);
         }
