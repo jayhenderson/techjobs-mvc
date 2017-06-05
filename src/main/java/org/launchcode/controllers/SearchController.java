@@ -17,17 +17,17 @@ import java.util.HashMap;
 @RequestMapping("search")
 public class SearchController {
 
-    @RequestMapping(value = "")
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String search(Model model) {
         model.addAttribute("columns", ListController.columnChoices);
         model.addAttribute("searchType", "all");
         return "search";
     }
 
-    @RequestMapping(value="/results", method = RequestMethod.GET)
+    @RequestMapping(value="", method = RequestMethod.POST)
     public String results(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
         model.addAttribute("columns", ListController.columnChoices);
-        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        ArrayList<HashMap<String, String>> jobs;
 
         if (searchType.equals("all") && searchTerm.equals("")) {
             jobs = JobData.findAll();
